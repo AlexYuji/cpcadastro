@@ -17,8 +17,8 @@
 	    	<h:form>
 				<h:panelGrid column="2">
 					<p:outputLabel for="name" value="Nome"/>
-					<p:inputText id="name" value="#{setupBean.setup.nome}" validatorMessage="O campo nome deve ser preenchido somente com letras e sem acentuação">
-						<f:validateRegex pattern="[A-Za-z]* [A-Za-z]*" />
+					<p:inputText id="name" value="#{setupBean.setup.nome}" validatorMessage="O campo nome deve ser preenchido somente com letras e sem acentuação" required="true">
+						<f:validateRegex pattern="^[aA-zZ]+((\s[aA-zZ]+)+)?$" />
 						<f:ajax event="blur" render="mensagens"/>
 					</p:inputText>
 			
@@ -27,7 +27,7 @@
           			</p:calendar>
 					
 					<p:outputLabel for="email" value="Email"/>
-					<p:inputText id="email" value="#{setupBean.setup.email}" validatorMessage="Digite um email válido">
+					<p:inputText id="email" value="#{setupBean.setup.email}" validatorMessage="Digite um email válido" required="true">
 						<f:validateRegex pattern="^([\w-]\.?)+@([\w-]+\.)+([A-Za-z]{2,4})+$"/>
 						<f:ajax event="blur" render="mensagens"/>
 					</p:inputText>
