@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui">
+    
+<ui:composition template="_template.xhtml">        
+	<ui:define name="content">
+		<p:messages id="mensagens"><p:autoUpdate /></p:messages>
+		<p:card class="card-cadastro">
+	  		  <f:facet name="title">
+	       		 Cadastro de Usuário
+	   		 </f:facet>
+	
+	    	<h:form>
+				<h:panelGrid column="2">
+					<p:outputLabel for="name" value="Nome"/>
+					<p:inputText id="name" value="#{setupBean.setup.nome}" validatorMessage="O campo nome deve ser preenchido somente com letras e sem acentuação">
+						<f:validateRegex pattern="[A-Za-z]* [A-Za-z]*" />
+						<f:ajax event="blur" render="mensagens"/>
+					</p:inputText>
+			
+					<p:outputLabel for="data" value="Data de Nascimento"/>
+          			<p:calendar id="data" value="#{setupBean.setup.dtNascimento}" required="true">
+          			</p:calendar>
+					
+					<p:outputLabel for="email" value="Email"/>
+					<p:inputText id="email" value="#{setupBean.setup.email}" validatorMessage="Digite um email válido">
+						<f:validateRegex pattern="^([\w-]\.?)+@([\w-]+\.)+([A-Za-z]{2,4})+$"/>
+						<f:ajax event="blur" render="mensagens"/>
+					</p:inputText>
+						
+            			<p:outputLabel for="senha" styleClass="p-col-fixed" style="width:100px" value="Senha"/>
+            			<div class="p-col">
+               				<p:password id="senha" value="#{setupBean.setup.senha}" label="Password 1" required="true">
+               				<f:validateLength minimum="6" maximum="15"/>
+							<f:ajax event="blur" render="mensagens"/>
+               				</p:password>
+          				</div>
+				
+				</h:panelGrid>
+			</h:form>
+	
+		    <f:facet name="footer">
+		        <p:commandButton icon="pi pi-check" value="Cadastrar" action="#{setupBean.cadastro}"/>
+		        <p:commandButton icon="pi pi-times" value="Cancelar" styleClass="ui-button-secondary" style="margin-left: .5em"/>
+		    </f:facet>
+		</p:card>
+		
+		<h:form>
+		    <div class="card">
+		        <p:dataTable var="setup" value="#{setupBean.setups}">
+		            <p:column headerText="Nome">
+		                <h:outputText value="#{setup.nome}" />
+		            </p:column>
+		
+		            <p:column headerText="Data de Nascimento">
+		                <h:outputText value="#{setup.dtNascimento}" />
+		            </p:column>
+		
+		            <p:column headerText="email">
+		                <h:outputText value="#{setup.email}" />
+		            </p:column>
+		
+		            <p:column headerText="Senha">
+		                <h:outputText value="#{setup.senha}" />
+		            </p:column>
+		        </p:dataTable>
+		    </div>
+		</h:form>
+
+	</ui:define>
+</ui:composition>
+
+</html>

@@ -1,0 +1,14 @@
+@charset "ISO-8859-1";
+
+body{
+	background:#eee;
+}
+
+.card-cadastro{
+	width: 25em;
+	margin: 2em auto;
+}
+
+h4{
+	margin: 0;
+}
